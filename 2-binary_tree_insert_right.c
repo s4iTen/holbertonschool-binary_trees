@@ -1,6 +1,6 @@
 #include "binary_trees.h"
 /**
- * binary_tree_insert_gight - this function and new node on the righ
+ * binary_tree_insert_right - this function and new node on the righ
  * @parent: this is the parent of the binary tree
  * @value: this is the value that have to be stored on the new node
  * Return: Always the new node or NULL if it fail
