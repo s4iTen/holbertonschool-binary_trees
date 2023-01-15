@@ -14,6 +14,17 @@ size_t _depth(const binary_tree_t *tree)
 		depth = 1 + _depth(tree->parent);
 	return (depth);
 }
+int is_child(const binary_tree_t *tree, int sec)
+{
+	if (tree)
+	{
+		if (tree->n == sec)
+			return (1);
+		is_child(tree->left, sec);
+		is_child(tree->right, sec);
+	}
+	return (0);
+}
 /**
  * binary_tree_ancestor - this function find the lowest common
  * ancestor of two nodes
@@ -24,8 +35,16 @@ size_t _depth(const binary_tree_t *tree)
 binary_tree_t
 *binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second)
 {
+	int i = is_child(first, second->n),
+	j = is_child(second, first->n);
 	if (first || second)
 	{
+		if (first == second)
+			return ((binary_tree_t *)first);	
+		if (i == 1)
+			return ((binary_tree_t*)first);
+		if (j == 1)
+			return ((binary_tree_t *)second);
 		if (_depth(first) == _depth(second) 
 		&& first->parent == second->parent)
 			return (first->parent);
