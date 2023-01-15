@@ -1,24 +1,18 @@
 #include "binary_trees.h"
 /**
- * height - this function count the height of the binary tree
- * @tree: this is the node
- * Return: Always the height or 0
+ * _depth - this function gives the depth of the node
+ * @tree: this is the node that we have search the depth of
+ * Return: Always the depth or NULL if it fail
  */
-int height(const binary_tree_t *tree)
+size_t _depth(const binary_tree_t *tree)
 {
-	int r = 0, l = 0;
+	size_t depth = 0;
 
-	if (!tree)
+	if (tree == NULL)
 		return (0);
-	if (!tree->right && !tree->left)
-		return (1);
-	if (tree->right)
-		r = 1 + height(tree->right);
-	if (tree->left)
-		l = 1 + height(tree->left);
-	if (l > r)
-		return (l);
-	return (r);
+	if (tree->parent)
+		depth = 1 + _depth(tree->parent);
+	return (depth);
 }
 /**
  * binary_tree_ancestor - this function find the lowest common
@@ -30,14 +24,18 @@ int height(const binary_tree_t *tree)
 binary_tree_t
 *binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second)
 {
-	if (!first || !second)
-		return (NULL);
-	if (second->parent == first)
-		return ((binary_tree_t *)first);
-	else if (first->parent == second)
-		return ((binary_tree_t *)second);
-	if (height(first) > height(second))
-		return (second->parent);
-	else
-		return (first->parent);
+	if (first || second)
+	{
+		if (_depth(first) == _depth(second))
+			return (first->parent);
+		if (first->parent == second)
+			return ((binary_tree_t *)second);
+		if (second->parent == first)
+			return ((binary_tree_t *)first);
+		if (_depth(first) > _depth(second))
+			return (second->parent);
+		else
+			return (first->parent);
+	}
+	return (NULL);
 }
