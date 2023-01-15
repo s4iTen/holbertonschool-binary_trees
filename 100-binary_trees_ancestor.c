@@ -33,20 +33,20 @@ int is_child(const binary_tree_t *tree, int sec)
  * Return: it depends the conditions
  */
 binary_tree_t
-*binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second)
+	*
+	binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second)
 {
 	int i = is_child(first, second->n),
-	j = is_child(second, first->n);
+		j = is_child(second, first->n);
 	if (first || second)
 	{
 		if (first == second)
-			return ((binary_tree_t *)first);	
+			return ((binary_tree_t *)first);
 		if (i == 1)
-			return ((binary_tree_t*)first);
+			return ((binary_tree_t *)first);
 		if (j == 1)
 			return ((binary_tree_t *)second);
-		if (_depth(first) == _depth(second) 
-		&& first->parent == second->parent)
+		if (_depth(first) == _depth(second) && first->parent == second->parent)
 			return (first->parent);
 		if (first->parent == second)
 			return ((binary_tree_t *)second);
