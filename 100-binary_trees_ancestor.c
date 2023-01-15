@@ -26,7 +26,8 @@ binary_tree_t
 {
 	if (first || second)
 	{
-		if (_depth(first) == _depth(second))
+		if (_depth(first) == _depth(second) 
+		&& first->parent == second->parent)
 			return (first->parent);
 		if (first->parent == second)
 			return ((binary_tree_t *)second);
